@@ -19,8 +19,8 @@ export default function CommitList() {
         setPage((currentPage) => currentPage + 1);
     }
 
-    if (error) return <div>failed to load</div>
-    if (isLoading) return <div>loading...</div>
+    if (error) return <div class="text-lg flex items-center justify-center h-screen">Failed to load</div>
+    if (isLoading) return <div class="text-lg flex items-center justify-center h-screen">Loading...</div>
 
     return (
         <div class="mt-8 mx-auto">
