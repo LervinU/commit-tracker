@@ -31,11 +31,11 @@ export default function CommitList() {
                     </div>
                 )
             })}
-            <div class="flex items-center justify-center">
-                <button onClick={handleNewerCommits} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+            <div class="flex items-center justify-center mb-8 mt-2">
+                <button onClick={handleNewerCommits} class="bg-gray-900 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-l">
                     Newer
                 </button>
-                <button onClick={handleOlderCommits} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                <button onClick={handleOlderCommits} class="bg-gray-900 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-r">
                     Older
                 </button>
             </div>
