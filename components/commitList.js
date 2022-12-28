@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useSWR from 'swr'
 import CommitCard from './commitCard';
 // import constants from '../utils/constants'
@@ -6,13 +6,24 @@ import CommitCard from './commitCard';
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function CommitList() { 
-    const { data, error, isLoading } = useSWR(`http://localhost:4000/commits?page=4`, fetcher)
+    const [page, setPage] = useState(1);
+    const { data, error, isLoading } = useSWR(`http://localhost:4000/commits?page=${page}&perPage=10`, fetcher);
+
+    const handleNewerCommits = () => {
+        if(page > 1) {
+            setPage((currentPage) => currentPage - 1);
+        }
+    }
+
+    const handleOlderCommits = () => { 
+        setPage((currentPage) => currentPage + 1);
+    }
 
     if (error) return <div>failed to load</div>
     if (isLoading) return <div>loading...</div>
 
     return (
-        <div>
+        <div class="mt-8 mx-auto">
             {data.map(commit => {
                 return (
                     <div>
@@ -20,7 +31,14 @@ export default function CommitList() {
                     </div>
                 )
             })}
-            
+            <div class="flex items-center justify-center">
+                <button onClick={handleNewerCommits} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                    Newer
+                </button>
+                <button onClick={handleOlderCommits} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                    Older
+                </button>
+            </div>
         </div>
     )
 }
